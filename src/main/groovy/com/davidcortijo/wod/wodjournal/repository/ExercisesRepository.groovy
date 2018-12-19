@@ -1,13 +1,14 @@
 package com.davidcortijo.wod.wodjournal.repository
 
+import com.davidcortijo.wod.wodjournal.beans.Exercise
 import org.springframework.data.mongodb.repository.MongoRepository
 
-interface ExerciseRepository extends MongoRepository<Exercise, String> {
+interface ExercisesRepository extends MongoRepository<Exercise, String> {
 
-    public Exercise findByName(String name)
-    public List<Exercise> findByName(String name)
+    Exercise findByName(String name)
+    //List<Exercise> findByName(String name)
 
-    public Exercise findByType(String type)
+    List<Exercise> findByType(String type)
 
     /* //Supports native JSON query string
     @Query("{domain:'?0'}")

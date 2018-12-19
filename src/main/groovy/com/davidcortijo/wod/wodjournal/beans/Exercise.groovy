@@ -12,6 +12,7 @@ class Exercise {
     @Indexed(unique = true)
     String name
 
+    String altName //for reduced names, like "Toes to bar" = T2B
     String type
     String desc
     String prime
