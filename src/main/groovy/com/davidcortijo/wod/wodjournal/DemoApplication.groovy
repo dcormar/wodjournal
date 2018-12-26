@@ -47,7 +47,5 @@ class DemoApplication implements CommandLineRunner{
 		}
 
         }
-
-
 }
 
