@@ -12,6 +12,7 @@ class Wod {
 
     @Indexed(unique = false)
     String name
+
     Date date
 
     List<Exercise> exercises
@@ -20,15 +21,15 @@ class Wod {
     String desc
     String level
 
-    public Exercise () {
+    Wod () {
 
     }
 
-    wod (def name, def type) {
+    Wod (def name, def type) {
         wod(name, type, null, null, null)
     }
 
-    wod (def name, def type, def exercises, def desc, def level) {
+    Wod (def name, def type, def exercises, def desc, def level) {
         this.name = name ?: "wod ${new Date().format( 'dd/MM/YYYY' )}"
         this.type = name ?: "standard"
         this.exercises = exercises

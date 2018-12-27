@@ -1,7 +1,7 @@
 package com.davidcortijo.wod.wodjournal
 
-import com.davidcortijo.wod.wodjournal.repository.ExercisesRepository
-import com.davidcortijo.wod.wodjournal.beans.Exercise
+import com.davidcortijo.wod.wodjournal.repository.MovementsRepository
+import com.davidcortijo.wod.wodjournal.beans.Movement
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 class DemoApplication implements CommandLineRunner{
 
 	@Autowired
-    ExercisesRepository repository
+	MovementsRepository repository
 
 	static main(args) {
 		SpringApplication.run (DemoApplication, args)
@@ -21,28 +21,28 @@ class DemoApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		repository.deleteAll()
 
-		// save a couple of exercises
-		repository.save(new Exercise("Push ups", "Floor"))
-		repository.save(new Exercise("Chest to bar", "Gymnastics"))
-		repository.save(new Exercise("Toes to bar", "Gymnastics"))
-		repository.save(new Exercise("Ring muscle up", "Gymnastics"))
+		// save a couple of movements
+		repository.save(new Movement("Push ups", "Floor"))
+		repository.save(new Movement("Chest to bar", "Gymnastics"))
+		repository.save(new Movement("Toes to bar", "Gymnastics"))
+		repository.save(new Movement("Ring muscle up", "Gymnastics"))
 
-		// fetch all Exercises
-		println "Exercises found with findAll():"
+		// fetch all Movements
+		println "Movement found with findAll():"
 		println "-------------------------------"
-		for (Exercise exercise : repository.findAll()) {
+		for (Movement exercise : repository.findAll()) {
 				print "${exercise.name}\n"
 		}
 		print "\n"
-		// fetch an individual Exercise
-		println("Exercise found with findByName('Push Ups'):")
+		// fetch an individual Movement
+		println("Movement found with findByName('Push Ups'):")
 		println "-------------------------------"
 		println repository.findByName("Push ups").name
 		print "\n"
-		// fetch a list of Gymnastic exercises
-		println("Exercises found with findByType('Gymnastics'):")
+		// fetch a list of Gymnastic Movements
+		println("Movement found with findByType('Gymnastics'):")
 		println "-------------------------------"
-		for (Exercise exercise : repository.findByType("Gymnastics")) {
+		for (Movement exercise : repository.findByType("Gymnastics")) {
 			println exercise.name
 		}
 

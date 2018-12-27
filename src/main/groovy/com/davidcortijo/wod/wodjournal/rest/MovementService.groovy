@@ -30,7 +30,7 @@ class MovementService {
 
     @GetMapping(value="/details/{name}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    Movement getExerciseDetails (@PathVariable String name) {
+    Movement getMovementDetails (@PathVariable String name) {
         logger.debug("Movement Request received for resource 'list'")
         return repository.findByName(name)
     }
@@ -43,7 +43,7 @@ class MovementService {
     }
 
     @PostMapping("/save")
-    Exercise newMovement (@RequestBody Movement newMovement) {
+    Movement newMovement (@RequestBody Movement newMovement) {
         logger.debug("Movement Request received for resource 'save'")
         return repository.save(newMovement)
     }
