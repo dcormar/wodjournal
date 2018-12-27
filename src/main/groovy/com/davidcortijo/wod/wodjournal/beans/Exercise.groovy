@@ -1,39 +1,18 @@
 package com.davidcortijo.wod.wodjournal.beans
 
-import org.springframework.data.annotation.Id
-import org.springframework.data.mongodb.core.index.Indexed
-import org.springframework.data.mongodb.core.mapping.Document
-
-@Document(collection = "exercise")
 class Exercise {
 
-    @Id
-    String Id
+    Movement movement
+    int reps
+    String weight //Kg-% for men/women. Example: 50/35, or 60% RM
 
-    @Indexed(unique = true)
-    String name
-
-    String altName //for reduced names, like "Toes to bar" = T2B
-    String type
-    String desc
-    String prime
-    String level
-
-    public Exercise () {
+    Exercise () {
 
     }
 
-    public Exercise (def name, def type) {
+    Exercise (def name, int reps) {
             this.name = name
-            this.type = type
-    }
-
-    public Exercise (def name, def type, def desc, def prime, def level) {
-        this.name = name
-        this.type = type
-        this.desc = desc
-        this.prime = prime
-        this.level = level
+            this.reps = reps
     }
 
 }
