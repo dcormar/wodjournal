@@ -3,11 +3,11 @@ package com.davidcortijo.wod.wodjournal.repository
 import com.davidcortijo.wod.wodjournal.beans.Wod
 import org.springframework.data.mongodb.repository.MongoRepository
 
-interface WodRepository extends MongoRepository<Wod, String> {
+interface WodsRepository extends MongoRepository<Wod, String> {
 
     Wod findByName(String name)
 
-    Wod findByDate(Date date)
+    List<Wod> findByDate(Date date)
 
     /* //Supports native JSON query string
     @Query("{domain:'?0'}")

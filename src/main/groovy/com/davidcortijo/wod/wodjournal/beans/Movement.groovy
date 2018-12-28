@@ -1,6 +1,7 @@
 package com.davidcortijo.wod.wodjournal.beans
 
 import org.springframework.data.annotation.Id
+import org.springframework.data.annotation.PersistenceConstructor
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 
@@ -10,7 +11,7 @@ class Movement {
     @Id
     String Id
 
-    @Indexed(unique = true)
+    //@Indexed(unique = true)
     String name
 
     String altName //for reduced names, like "Toes to bar" = T2B
@@ -19,15 +20,11 @@ class Movement {
     String prime
     String level
 
-    Movement () {
-
-    }
-
     Movement (def name, def type) {
         this.name = name
         this.type = type
     }
-
+    @PersistenceConstructor
     Movement (def name, def type, def desc, def prime, def level) {
         this.name = name
         this.type = type

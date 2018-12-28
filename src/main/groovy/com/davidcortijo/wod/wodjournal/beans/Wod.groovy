@@ -1,8 +1,11 @@
 package com.davidcortijo.wod.wodjournal.beans
 
 import org.springframework.data.annotation.Id
+import org.springframework.data.annotation.PersistenceConstructor
 import org.springframework.data.mongodb.core.index.Indexed
+import org.springframework.data.mongodb.core.mapping.DBRef
 import org.springframework.data.mongodb.core.mapping.Document
+
 
 @Document(collection = "wod")
 class Wod {
@@ -15,23 +18,22 @@ class Wod {
 
     Date date
 
-    List<Exercise> exercises
+    @DBRef
+    List<Movement> exercises
 
     String type //for "girls", "hero", "chipper" etc
     String desc
     String level
 
-    Wod () {
 
+    Wod (def name, def type, def date, def exercises) {
+        this(name, type, date, exercises, null, null)
     }
-
-    Wod (def name, def type) {
-        wod(name, type, null, null, null)
-    }
-
-    Wod (def name, def type, def exercises, def desc, def level) {
+    @PersistenceConstructor
+    Wod (def name, def type, def date, def exercises, def desc, def level) {
         this.name = name ?: "wod ${new Date().format( 'dd/MM/YYYY' )}"
         this.type = name ?: "standard"
+        this.date = date ?: new Date().clearTime()
         this.exercises = exercises
         this.desc = desc
         this.level = level
