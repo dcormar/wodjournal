@@ -4,6 +4,7 @@ import com.davidcortijo.wod.wodjournal.repository.WodsRepository
 import com.davidcortijo.wod.wodjournal.repository.MovementsRepository
 import com.davidcortijo.wod.wodjournal.beans.Wod
 import com.davidcortijo.wod.wodjournal.beans.Movement
+import com.davidcortijo.wod.wodjournal.beans.Exercise
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
@@ -58,16 +59,15 @@ class DemoApplication implements CommandLineRunner{
 
 		// save a couple of wods
 		Movement mov = mrepository.findByName("Push ups")
-		println "${mov.id} - ${mov.name} - ${mov.type}"
-		wrepository.save(new Wod("Cindy", "Girls", null, Arrays.asList(mrepository.findByName("Push ups") )))
-		wrepository.save(new Wod("Fran", "Hero", null,Arrays.asList(mrepository.findByName("Push ups")  )))
-
+		wrepository.save(new Wod("Cindy", "Girls", null, Arrays.asList(new Exercise(mrepository.findByName("Push ups"), 10, "15 kg"))))
+		wrepository.save(new Wod("Fran", "Hero", null,Arrays.asList(new Exercise(mrepository.findByName("Push ups"), 25, "25 kg"))))
+		print "\n"
 		// fetch a list of Today's wods
 		println("Today's wods:")
 		println "-------------------------------"
 		for (Wod wod : wrepository.findByDate(new Date().clearTime())) {
 			println wod.name
 		}
-        }
+	}
 }
 

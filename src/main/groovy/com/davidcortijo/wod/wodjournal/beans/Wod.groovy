@@ -3,7 +3,6 @@ package com.davidcortijo.wod.wodjournal.beans
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.PersistenceConstructor
 import org.springframework.data.mongodb.core.index.Indexed
-import org.springframework.data.mongodb.core.mapping.DBRef
 import org.springframework.data.mongodb.core.mapping.Document
 
 
@@ -18,8 +17,8 @@ class Wod {
 
     Date date
 
-    @DBRef
-    List<Movement> exercises
+
+    List<Exercise> exercises
 
     String type //for "girls", "hero", "chipper" etc
     String desc
@@ -37,6 +36,16 @@ class Wod {
         this.exercises = exercises
         this.desc = desc
         this.level = level
+    }
+
+    String toString () {
+        return """[Id: ${this.id}
+                    name: "${this.name}"
+                    date: "${this.date}"
+                    exercises: {${this.exercises.each {x -> x.toString()}}}
+                    type: "${this.type}"
+                    desc: "${this.desc}"
+                    level: "${this.level}"]"""
     }
 
 }
