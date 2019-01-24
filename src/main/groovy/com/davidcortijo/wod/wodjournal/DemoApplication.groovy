@@ -32,12 +32,14 @@ class DemoApplication implements CommandLineRunner{
 		mongoTemplate.dropCollection(Movement)
 		mongoTemplate.dropCollection(Wod)
 
+		sleep(20000)
+		/*
 		// save a couple of movements
 		mrepository.save(new Movement("Push ups", "Floor"))
 		mrepository.save(new Movement("Chest to bar", "Gymnastics"))
 		mrepository.save(new Movement("Toes to bar", "Gymnastics"))
 		mrepository.save(new Movement("Ring muscle up", "Gymnastics"))
-
+		*/
 		// fetch all Movements
 		println "Movement found with findAll():"
 		println "-------------------------------"
@@ -56,11 +58,13 @@ class DemoApplication implements CommandLineRunner{
 		for (Movement exercise : mrepository.findByType("Gymnastics")) {
 			println exercise.name
 		}
-
+		/*
 		// save a couple of wods
 		Movement mov = mrepository.findByName("Push ups")
 		wrepository.save(new Wod("Cindy", "Girls", null, Arrays.asList(new Exercise(mrepository.findByName("Push ups"), 10, "15 kg"))))
 		wrepository.save(new Wod("Fran", "Hero", null,Arrays.asList(new Exercise(mrepository.findByName("Push ups"), 25, "25 kg"))))
+
+		*/
 		print "\n"
 		// fetch a list of Today's wods
 		println("Today's wods:")

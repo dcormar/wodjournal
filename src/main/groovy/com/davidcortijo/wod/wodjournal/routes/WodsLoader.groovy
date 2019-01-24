@@ -1,32 +1,30 @@
 package com.davidcortijo.wod.wodjournal.routes
 
-import com.davidcortijo.wod.wodjournal.beans.Movement
-import com.davidcortijo.wod.wodjournal.repository.MovementsRepository
-import org.apache.camel.Exchange
-import org.apache.camel.Processor
+import com.davidcortijo.wod.wodjournal.beans.Wod
+import com.davidcortijo.wod.wodjournal.repository.WodsRepository
 import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.model.dataformat.BindyType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-public class MovementsLoader extends RouteBuilder {
+public class WodsLoader extends RouteBuilder {
 
     @Autowired
-    MovementsRepository mrepository
+    WodsRepository wrepository
 
     @Override
     public void configure() throws Exception {
-        from("file:etl/csvfiles/movements?noop=true&idempotent=true")//?runLoggingLevel=INFO
+        from("file:etl/csvfiles/wods?noop=true&idempotent=true")//?runLoggingLevel=INFO
         //.log("Looking at: ${simple('${headers.CamelFileAbsolutePath}')}")
         //.log("File content is: ${simple('${body}')}")
         .unmarshal()
-        .bindy(BindyType.Csv, com.davidcortijo.wod.wodjournal.beans.Movement.class)
+        .bindy(BindyType.Csv, com.davidcortijo.wod.wodjournal.beans.Wod.class)
         .split(body())
         .log("${simple('${body}')}")
         .process {
-            Movement m = it.in.getBody(Movement.class)
-            mrepository.save(m)
+            Wod w = it.in.getBody(Wod.class)
+            wrepository.save(w)
         }
     }
 
